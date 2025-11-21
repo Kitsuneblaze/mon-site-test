@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accueil</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: gold;
+}
+
+/* Particules */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Contenu central */
+.main-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Boutons */
+.main-content button {
+    display: block;
+    margin: 15px auto;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid gold;
+    background: rgba(0,0,0,0.3);
+    color: gold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.main-content button:hover {
+    background: gold;
+    color: black;
+}
+</style>
+</head>
+<body>
+<div id="particles-container"></div>
+
+<div class="main-content">
+    <h1>Bienvenue</h1>
+    <button id="textBtn">Text</button>
+    <button id="teamBtn">Team</button>
+    <button id="familleBtn">Famille</button>
+</div>
+
+<script>
+// Particules animées
+const container = document.getElementById("particles-container");
+const particlesCount = 80;
+const particles = [];
+for (let i = 0; i < particlesCount; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    const size = Math.random() * 5 + 2;
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+    particle.style.background = `rgba(${200 + Math.random()*55}, ${50 + Math.random()*50}, 0, ${0.3 + Math.random()*0.7})`;
+    particle.style.left = Math.random() * window.innerWidth + "px";
+    particle.style.top = Math.random() * window.innerHeight + "px";
+    const speedX = (Math.random() - 0.5) * 2;
+    const speedY = (Math.random() - 0.5) * 2;
+    container.appendChild(particle);
+    particles.push({ element: particle, speedX, speedY });
+}
+function moveParticles() {
+    particles.forEach(p => {
+        let top = parseFloat(p.element.style.top);
+        let left = parseFloat(p.element.style.left);
+        top += p.speedY;
+        left += p.speedX;
+        if (top < 0) top = window.innerHeight;
+        if (top > window.innerHeight) top = 0;
+        if (left < 0) left = window.innerWidth;
+        if (left > window.innerWidth) left = 0;
+        p.element.style.top = top + "px";
+        p.element.style.left = left + "px";
+    });
+    requestAnimationFrame(moveParticles);
+}
+moveParticles();
+
+// Boutons
+document.getElementById("textBtn").addEventListener("click", () => {
+    window.location.href = "text.html"; // Page pour parler
+});
+document.getElementById("teamBtn").addEventListener("click", () => {
+    window.location.href = "team.html"; // Page Team
+});
+document.getElementById("familleBtn").addEventListener("click", () => {
+    alert("Bouton Famille désactivé pour l'instant."); // Pour l'instant ne fait rien
+});
+</script>
+</body>
+</html>

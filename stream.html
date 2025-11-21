@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coin Stream</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: gold;
+    overflow: hidden;
+}
+
+/* Particules */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Layout principal */
+.container {
+    display: flex;
+    height: 100%;
+}
+
+/* Zone vidéo */
+#videoArea {
+    flex: 2;
+    margin: 10px;
+    background: #111;
+    border: 2px solid gold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#videoArea video {
+    max-width: 100%;
+    max-height: 100%;
+    background: black;
+}
+
+/* Chat */
+#chatArea {
+    flex: 1;
+    margin: 10px;
+    background: #222;
+    border: 2px solid gold;
+    display: flex;
+    flex-direction: column;
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#messages p {
+    margin: 5px 0;
+}
+
+#chatInput {
+    display: flex;
+}
+
+#chatInput input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #333;
+    color: gold;
+}
+
+#chatInput button {
+    padding: 10px 15px;
+    border: none;
+    background: gold;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Bouton Start/Stop */
+#streamBtn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-weight: bold;
+    background: gold;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div id="particles-container"></div>
+
+<div class="container">
+    <div id="videoArea">
+        <video id="streamVideo" autoplay muted></video>
+        <button id="streamBtn">Start Stream</button>
+    </div>
+    <div id="chatArea">
+        <div id="messages"></div>
+        <div id="chatInput">
+            <input type="text" id="messageText" placeholder="Écrire un message...">
+            <button id="sendBtn">Envoyer</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Particules animées
+const container = document.getElementById("particles-container");
+const particlesCount = 80;
+const particles = [];
+for (let i = 0; i < particlesCount; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    const size = Math.random() * 5 + 2;
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+    particle.style.background = `rgba(${200 + Math.random()*55}, ${50 + Math.random()*50}, 0, ${0.3 + Math.random()*0.7})`;
+    particle.style.left = Math.random() * window.innerWidth + "px";
+    particle.style.top = Math.random() * window.innerHeight + "px";
+    const speedX = (Math.random() - 0.5) * 2;
+    const speedY = (Math.random() - 0.5) * 2;
+    container.appendChild(particle);
+    particles.push({ element: particle, speedX, speedY });
+}
+function moveParticles() {
+    particles.forEach(p => {
+        let top = parseFloat(p.element.style.top);
+        let left = parseFloat(p.element.style.left);
+        top += p.speedY;
+        left += p.speedX;
+        if (top < 0) top = window.innerHeight;
+        if (top > window.innerHeight) top = 0;
+        if (left < 0) left = window.innerWidth;
+        if (left > window.innerWidth) left = 0;
+        p.element.style.top = top + "px";
+        p.element.style.left = left + "px";
+    });
+    requestAnimationFrame(moveParticles);
+}
+moveParticles();
+
+// Stream simulé via getUserMedia
+const video = document.getElementById("streamVideo");
+const streamBtn = document.getElementById("streamBtn");
+let streaming = false;
+
+streamBtn.addEventListener("click", async () => {
+    if(!streaming){
+        try{
+            const stream = await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+            video.srcObject = stream;
+            streaming = true;
+            streamBtn.textContent = "Stop Stream";
+            stream.getVideoTracks()[0].addEventListener('ended', () => {
+                streaming = false;
+                streamBtn.textContent = "Start Stream";
+                video.srcObject = null;
+            });
+        }catch(e){
+            alert("Impossible de partager l'écran.");
+        }
+    }else{
+        const tracks = video.srcObject.getTracks();
+        tracks.forEach(track => track.stop());
+        video.srcObject = null;
+        streaming = false;
+        streamBtn.textContent = "Start Stream";
+    }
+});
+
+// Chat basique
+const sendBtn = document.getElementById("sendBtn");
+const messageInput = document.getElementById("messageText");
+const messagesDiv = document.getElementById("messages");
+
+function addMessage(text, sender="Moi"){
+    const p = document.createElement("p");
+    p.textContent = sender+": "+text;
+    messagesDiv.appendChild(p);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+sendBtn.addEventListener("click", () => {
+    if(messageInput.value.trim() !== ""){
+        addMessage(messageInput.value);
+        messageInput.value = "";
+    }
+});
+
+messageInput.addEventListener("keypress", e => {
+    if(e.key === "Enter"){
+        sendBtn.click();
+    }
+});
+</script>
+</body>
+</html>

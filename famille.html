@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coin Échecs</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: gold;
+    overflow: hidden;
+}
+
+/* Particules */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Contenu central */
+.main-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Plateau d'échecs */
+#chessBoard {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: repeat(8, 40px);
+    margin: 20px auto;
+    border: 2px solid gold;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.square.black {
+    background: #333;
+}
+
+.square.white {
+    background: #ddd;
+    color: black;
+}
+
+/* Bouton */
+#resetBtn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid gold;
+    background: rgba(0,0,0,0.3);
+    color: gold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#resetBtn:hover {
+    background: gold;
+    color: black;
+}
+</style>
+</head>
+<body>
+<div id="particles-container"></div>
+
+<div class="main-content">
+    <h1>Coin Échecs</h1>
+    <div id="chessBoard"></div>
+    <button id="resetBtn">Recommencer</button>
+</div>
+
+<script>
+// Particules animées
+const container = document.getElementById("particles-container");
+const particlesCount = 80;
+const particles = [];
+for (let i = 0; i < particlesCount; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    const size = Math.random() * 5 + 2;
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+    particle.style.background = `rgba(${200 + Math.random()*55}, ${50 + Math.random()*50}, 0, ${0.3 + Math.random()*0.7})`;
+    particle.style.left = Math.random() * window.innerWidth + "px";
+    particle.style.top = Math.random() * window.innerHeight + "px";
+    const speedX = (Math.random() - 0.5) * 2;
+    const speedY = (Math.random() - 0.5) * 2;
+    container.appendChild(particle);
+    particles.push({ element: particle, speedX, speedY });
+}
+function moveParticles() {
+    particles.forEach(p => {
+        let top = parseFloat(p.element.style.top);
+        let left = parseFloat(p.element.style.left);
+        top += p.speedY;
+        left += p.speedX;
+        if (top < 0) top = window.innerHeight;
+        if (top > window.innerHeight) top = 0;
+        if (left < 0) left = window.innerWidth;
+        if (left > window.innerWidth) left = 0;
+        p.element.style.top = top + "px";
+        p.element.style.left = left + "px";
+    });
+    requestAnimationFrame(moveParticles);
+}
+moveParticles();
+
+// Plateau d'échecs
+const board = document.getElementById("chessBoard");
+const boardSize = 8;
+let selectedSquare = null;
+
+// Unicode pièces
+const initialBoard = [
+    ["♜","♞","♝","♛","♚","♝","♞","♜"],
+    ["♟","♟","♟","♟","♟","♟","♟","♟"],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["♙","♙","♙","♙","♙","♙","♙","♙"],
+    ["♖","♘","♗","♕","♔","♗","♘","♖"]
+];
+
+function drawBoard() {
+    board.innerHTML = "";
+    for(let i=0;i<boardSize;i++){
+        for(let j=0;j<boardSize;j++){
+            const square = document.createElement("div");
+            square.classList.add("square");
+            square.classList.add((i+j)%2===0 ? "white":"black");
+            square.textContent = initialBoard[i][j];
+            square.dataset.row = i;
+            square.dataset.col = j;
+            square.addEventListener("click", () => handleClick(i,j));
+            board.appendChild(square);
+        }
+    }
+}
+
+function handleClick(row,col){
+    const piece = initialBoard[row][col];
+    if(selectedSquare){
+        // Déplacement simple
+        initialBoard[row][col] = initialBoard[selectedSquare.row][selectedSquare.col];
+        initialBoard[selectedSquare.row][selectedSquare.col] = "";
+        selectedSquare = null;
+        drawBoard();
+    } else if(piece !== ""){
+        selectedSquare = {row,col};
+    }
+}
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+    // Réinitialiser
+    for(let i=0;i<8;i++){
+        for(let j=0;j<8;j++){
+            initialBoard[i][j] = [
+                ["♜","♞","♝","♛","♚","♝","♞","♜"],
+                ["♟","♟","♟","♟","♟","♟","♟","♟"],
+                ["","","","","","","",""],
+                ["","","","","","","",""],
+                ["","","","","","","",""],
+                ["","","","","","","",""],
+                ["♙","♙","♙","♙","♙","♙","♙","♙"],
+                ["♖","♘","♗","♕","♔","♗","♘","♖"]
+            ][i][j];
+        }
+    }
+    drawBoard();
+});
+
+drawBoard();
+</script>
+</body>
+</html>
