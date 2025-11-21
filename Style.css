@@ -1,19 +1,148 @@
-/* Section À propos */
-.section.about {
-  background-color: #000; /* fond noir */
-  color: #fff; /* texte blanc */
-  padding: 80px 20px;
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.section.about h2 {
-  color: #FFD700; /* titre doré */
-  text-align: center;
-  margin-bottom: 20px;
+/* BODY BACKGROUND */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    animation: fadeInZoom 1.4s ease-out forwards;
 }
 
-.section.about p {
-  color: #fff;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  text-align: center;
+/* Animation entrée */
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* HERO / ENTÊTE */
+.hero {
+    background-image: url('telechjarger.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    padding: 20px;
+}
+
+/* BOUTON */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #00aaff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    transition: 0.3s;
+    box-shadow: 0 0 12px #00aaff;
+}
+
+.btn:hover {
+    background-color: #0088dd;
+    box-shadow: 0 0 20px #00c8ff;
+}
+
+/* TITRE NÉON */
+.neon-title {
+    font-size: 3rem;
+    text-shadow: 0 0 12px #00c8ff, 0 0 30px #0099ff;
+    animation: neonPulse 2.6s infinite ease-in-out;
+}
+
+.neon-title2 {
+    font-size: 2.3rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #9747ff, 0 0 25px #6f2ed8;
+    animation: neonPulsePurple 3s infinite ease-in-out;
+}
+
+@keyframes neonPulse {
+    0% { text-shadow: 0 0 10px #00c8ff; }
+    50% { text-shadow: 0 0 20px #00f2ff; }
+    100% { text-shadow: 0 0 10px #00c8ff; }
+}
+
+@keyframes neonPulsePurple {
+    0% { text-shadow: 0 0 10px #9747ff; }
+    50% { text-shadow: 0 0 22px #b374ff; }
+    100% { text-shadow: 0 0 10px #9747ff; }
+}
+
+/* SECTIONS */
+.section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* HOLOGRAM BLOCK */
+.holo-block {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(0, 170, 255, 0.35);
+    backdrop-filter: blur(5px);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
+    animation: holoAppear 1.3s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes holoAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+        box-shadow: 0 0 0px rgba(0, 170, 255, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
+    }
+}
+
+/* FOOTER */
+.footer {
+    background: #111;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer p {
+    color: #bbb;
+    font-size: 0.9rem;
 }
