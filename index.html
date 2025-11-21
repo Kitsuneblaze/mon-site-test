@@ -1,166 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fun Gaming Hub</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Footer link */
-    .footer-link {
-      color: #FFD700;
-      text-decoration: none;
-      font-size: 24px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .footer-link:hover {
-      color: #FFFFFF;
-      text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
-      transform: scale(1.1);
-    }
-
-    /* Hero / Background */
-    .hero {
-      background-image: url('telechjarger.png'); /* ton image de fond */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* overlay sombre pour texte */
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      padding: 20px;
-      color: #fff;
-    }
-
-    .hero h1 {
-      font-size: 4rem;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 30px;
-      background-color: #ff6600;
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #e55a00;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Gaming</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header / Hero -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Fun Gaming Hub</h1>
-      <p>Rejoins la communauté — joue, partage, connecte-toi</p>
-      <a href="#about" class="btn">En savoir plus</a>
-    </div>
-  </header>
-
-  <!-- Bouton Discord -->
-  <div style="text-align:center; margin: 30px 0;">
-    <a href="https://discord.com/channels/1441257208003432491/1441258520224993310" target="_blank" 
-       style="padding: 15px 30px; background-color: #43B581; color: white; 
-              text-decoration: none; font-size: 18px; border-radius: 10px; font-weight: bold;">
-      Rejoindre VC Chill
-    </a>
-  </div>
-
-  <!-- Section À propos -->
-  <section id="about" class="section about">
-    <div class="container">
-      <h2>À propos de nous</h2>
-      <p>
-        Fun Gaming Hub est un espace dédié aux joueurs passionnés. Que tu sois
-        compétiteur, streamer, ou juste ici pour le fun, tu trouveras des ressources,
-        des événements, et des joueurs comme toi.
-      </p>
-    </div>
-  </section>
-
-  <!-- Section Services / Fonctionnalités -->
-  <section id="features" class="section features">
-    <div class="container">
-      <h2>Ce que nous offrons</h2>
-      <div class="feature-list">
-        <div class="feature-item">
-          <h3>Tournois</h3>
-          <p>Participe à des tournois réguliers avec des prix et des classements.</p>
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="neon-title">Bienvenue dans notre salon gaming</h1>
+            <p>Tout est possible, contactez-nous sur notre Discord pour plus d’informations !</p>
+            <a href="#" class="btn">Rejoindre le Discord</a>
         </div>
-        <div class="feature-item">
-          <h3>Communauté</h3>
-          <p>Un forum, des groupes de discussion et des salons vocaux.</p>
+    </header>
+
+    <!-- SECTION A PROPOS -->
+    <section class="section">
+        <div class="container holo-block">
+            <h2 class="neon-title2">À propos de nous</h2>
+            <p>
+                Un salon avec un accueil chaleureux pour les passionnés de jeux vidéo et de détente. 
+                Vous trouverez un espace de gaming pour le streaming avec un chat interactif, ainsi qu’un coin chill pour profiter de musique douce et de streams relaxants comme Palia.
+                Rejoignez notre communauté et partagez des moments de passion et de détente.
+            </p>
         </div>
-        <div class="feature-item">
-          <h3>Ressources</h3>
-          <p>Tutoriaux, guides, et vidéos pour améliorer ton gameplay.</p>
+    </section>
+
+    <!-- SECTION SALON -->
+    <section class="section">
+        <div class="container holo-block">
+            <h2 class="neon-title2">Notre espace</h2>
+            <p>
+                Découvrez un environnement immersif avec un style futuriste, des jeux, des streams, de la chill music, 
+                et une communauté toujours présente. Le salon évolue constamment !
+            </p>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section Contact -->
-  <section id="contact" class="section contact">
-    <div class="container">
-      <h2>Contactez-nous</h2>
-      <form action="#" method="post">
-        <label for="name">Nom</label>
-        <input type="text" id="name" name="name" required />
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 Salon Gaming — Tous droits réservés.</p>
+    </footer>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit" class="btn">Envoyer</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.7); color: white;">
-    <a href="https://kitsuneblaze.wixsite.com/fun-gaming-hub" target="_blank" class="footer-link">
-      https://kitsuneblaze.wixsite.com/fun-gaming-hub
-    </a>
-    <p>&copy; 2025 Fun Gaming Hub. Tous droits réservés.</p>
-  </footer>
-
-  <!-- JS -->
-  <script src="script.js"></script>
-  
 </body>
 </html>
