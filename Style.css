@@ -1,148 +1,102 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* BODY BACKGROUND */
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    animation: fadeInZoom 1.4s ease-out forwards;
-}
-
-/* Animation entrée */
-@keyframes fadeInZoom {
-    0% {
-        opacity: 0;
-        transform: scale(1.06);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* HERO / ENTÊTE */
+/* HERO / BACKGROUND */
 .hero {
-    background-image: url('telechjarger.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
+  background-image: url('telechjarger.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Overlay sombre */
 .hero::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.55);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
 }
 
+/* Petit effet scan futuriste */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  height: 200%;
+  width: 100%;
+  background: linear-gradient(
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: scan 6s linear infinite;
+}
+@keyframes scan {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* Contenu */
 .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    padding: 20px;
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+  color: #fff;
 }
 
-/* BOUTON */
+/* Titre avec effet néon + léger glitch */
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px #ff8800, 0 0 30px #ff6600;
+  position: relative;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Neon breathing */
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff6600; }
+  to   { text-shadow: 0 0 25px #ffaa00; }
+}
+
+/* Sous-titre */
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* BTN amélioré */
 .btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #00aaff;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    transition: 0.3s;
-    box-shadow: 0 0 12px #00aaff;
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #ff6600;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 100, 0, 0.6);
+  transition: 0.3s;
+  animation: pulse 2s infinite ease-in-out;
 }
 
 .btn:hover {
-    background-color: #0088dd;
-    box-shadow: 0 0 20px #00c8ff;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff8800, 0 0 60px #ffaa00;
 }
 
-/* TITRE NÉON */
-.neon-title {
-    font-size: 3rem;
-    text-shadow: 0 0 12px #00c8ff, 0 0 30px #0099ff;
-    animation: neonPulse 2.6s infinite ease-in-out;
-}
-
-.neon-title2 {
-    font-size: 2.3rem;
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px #9747ff, 0 0 25px #6f2ed8;
-    animation: neonPulsePurple 3s infinite ease-in-out;
-}
-
-@keyframes neonPulse {
-    0% { text-shadow: 0 0 10px #00c8ff; }
-    50% { text-shadow: 0 0 20px #00f2ff; }
-    100% { text-shadow: 0 0 10px #00c8ff; }
-}
-
-@keyframes neonPulsePurple {
-    0% { text-shadow: 0 0 10px #9747ff; }
-    50% { text-shadow: 0 0 22px #b374ff; }
-    100% { text-shadow: 0 0 10px #9747ff; }
-}
-
-/* SECTIONS */
-.section {
-    padding: 80px 20px;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-/* HOLOGRAM BLOCK */
-.holo-block {
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(0, 170, 255, 0.35);
-    backdrop-filter: blur(5px);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
-    animation: holoAppear 1.3s ease-out forwards;
-    opacity: 0;
-}
-
-@keyframes holoAppear {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-        box-shadow: 0 0 0px rgba(0, 170, 255, 0);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
-    }
-}
-
-/* FOOTER */
-.footer {
-    background: #111;
-    padding: 20px 0;
-    text-align: center;
-}
-
-.footer p {
-    color: #bbb;
-    font-size: 0.9rem;
+/* Effet respiration bouton */
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #ff6600; }
+  50% { box-shadow: 0 0 25px #ffaa00; }
+  100% { box-shadow: 0 0 10px #ff6600; }
 }
