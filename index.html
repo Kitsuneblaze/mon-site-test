@@ -52,10 +52,12 @@
     .hero h1 {
       font-size: 4rem;
       margin-bottom: 20px;
+      text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700; /* néon */
     }
     .hero p {
       font-size: 1.5rem;
       margin-bottom: 30px;
+      text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700;
     }
     .btn {
       display: inline-block;
@@ -69,31 +71,6 @@
     }
     .btn:hover {
       background-color: #e55a00;
-    }
-
-    /* Section Joueurs */
-    .players .player-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 30px;
-      justify-content: center;
-    }
-    .player-item {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 400px;
-      color: #fff;
-      text-align: center;
-    }
-    .player-item h3 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-    .player-item p {
-      font-size: 1rem;
-      line-height: 1.5;
     }
   </style>
 </head>
@@ -126,25 +103,6 @@
         compétiteur, streamer, ou juste ici pour le fun, tu trouveras des ressources,
         des événements, et des joueurs comme toi.
       </p>
-    </div>
-  </section>
-
-  <!-- Section Joueurs -->
-  <section id="players" class="section players">
-    <div class="container">
-      <h2>Nos Joueurs</h2>
-      <div class="player-list">
-        <div class="player-item">
-          <h3>KitsuneBlaze</h3>
-          <p>
-            KitsuneBlaze vit pour le gaming ! Que ce soit pour dominer dans les jeux de combat,
-            explorer des univers à la première personne, ou se détendre sur Minecraft et Palia,
-            il est toujours prêt à relever le défi. Des heures de jeu, de la passion,
-            et des aventures épiques l’attendent. Reste connecté pour en découvrir plus bientôt !
-          </p>
-        </div>
-        <!-- Autres joueurs pourront être ajoutés ici -->
-      </div>
     </div>
   </section>
 
@@ -201,5 +159,3 @@
 
 </body>
 </html>
-
-
