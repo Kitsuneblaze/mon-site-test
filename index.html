@@ -6,9 +6,23 @@
   <title>Fun Gaming Hub</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Footer link */
+    .footer-link {
+      color: #FFD700;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .footer-link:hover {
+      color: #FFFFFF;
+      text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+      transform: scale(1.1);
+    }
+
     /* Hero / Background */
     .hero {
-      background-image: url('telechjarger.png'); /* ton image de fond */
+      background-image: url('telechjarger.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -19,7 +33,6 @@
       text-align: center;
       position: relative;
     }
-
     .hero::after {
       content: "";
       position: absolute;
@@ -27,9 +40,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* overlay sombre */
+      background: rgba(0, 0, 0, 0.5);
     }
-
     .hero-content {
       position: relative;
       z-index: 1;
@@ -37,18 +49,14 @@
       padding: 20px;
       color: #fff;
     }
-
     .hero h1 {
       font-size: 4rem;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px #FFD700, 0 0 20px #FF8C00; /* effet néon */
     }
-
     .hero p {
       font-size: 1.5rem;
       margin-bottom: 30px;
     }
-
     .btn {
       display: inline-block;
       padding: 12px 30px;
@@ -59,24 +67,8 @@
       border-radius: 5px;
       transition: background-color 0.3s;
     }
-
     .btn:hover {
       background-color: #e55a00;
-    }
-
-    /* Footer link */
-    .footer-link {
-      color: #FFD700;
-      text-decoration: none;
-      font-size: 24px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .footer-link:hover {
-      color: #FFFFFF;
-      text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
-      transform: scale(1.1);
     }
   </style>
 </head>
@@ -86,7 +78,7 @@
   <header class="hero">
     <div class="hero-content">
       <h1>Bienvenue dans l'entrée de l'élite</h1>
-      <p>Rejoins notre salon gaming où la passion, la compétition et le chill se rencontrent. Profite de l'ambiance, découvre nos joueurs et connecte-toi à notre communauté.</p>
+      <p>Rejoins la communauté — joue, partage, connecte-toi</p>
       <a href="#about" class="btn">En savoir plus</a>
     </div>
   </header>
@@ -105,7 +97,9 @@
     <div class="container">
       <h2>À propos de nous</h2>
       <p>
-        Fun Gaming Hub est un espace dédié aux joueurs passionnés. Que tu sois compétiteur, streamer, ou juste ici pour le fun, tu trouveras des ressources, des événements, et des joueurs comme toi.
+        Fun Gaming Hub est un espace dédié aux joueurs passionnés. Que tu sois
+        compétiteur, streamer, ou juste ici pour le fun, tu trouveras des ressources,
+        des événements, et des joueurs comme toi.
       </p>
     </div>
   </section>
@@ -152,7 +146,7 @@
 
   <!-- Footer -->
   <footer class="footer" style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.7); color: white;">
-    <a href="https://aydenbibeau.wixsite.com/fun-gaming-hub" target="_blank" class="footer-link">
+    <a href="https://kitsuneblaze.wixsite.com/fun-gaming-hub" target="_blank" class="footer-link">
       https://aydenbibeau.wixsite.com/fun-gaming-hub
     </a>
     <p>&copy; 2025 Fun Gaming Hub. Tous droits réservés.</p>
