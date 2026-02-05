@@ -3,158 +3,192 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fun Gaming Hub</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Bienvenue sur l’Élite</title>
+
   <style>
-    /* Footer link */
-    .footer-link {
-      color: #FFD700;
-      text-decoration: none;
-      font-size: 24px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .footer-link:hover {
-      color: #FFFFFF;
-      text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
-      transform: scale(1.1);
+    /* === RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
     }
 
-    /* Hero / Background */
+    body {
+      min-height: 100vh;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* === BACKGROUND OR & NOIR ANIMÉ === */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(212,175,55,0.25), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(212,175,55,0.15), transparent 45%),
+        linear-gradient(120deg, #000000, #0b0b0b, #1a1405);
+      background-size: 200% 200%;
+      animation: goldFlow 18s ease-in-out infinite;
+      z-index: -2;
+    }
+
+    @keyframes goldFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* === PARTICULES NETHER === */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -10px;
+      width: 3px;
+      height: 3px;
+      background: rgba(212,175,55,0.8);
+      box-shadow: 0 0 6px rgba(212,175,55,0.8);
+      animation: rise linear infinite;
+      opacity: 0.8;
+    }
+
+    .particle.dark {
+      background: rgba(0,0,0,0.9);
+      box-shadow: 0 0 6px rgba(0,0,0,0.9);
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      20% { opacity: 0.8; }
+      to {
+        transform: translateY(-110vh) scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    /* === HERO === */
     .hero {
-      background-image: url('telechjarger.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       height: 100vh;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       text-align: center;
-      position: relative;
+      padding: 2rem;
     }
-    .hero::after {
+
+    /* TITRE PRINCIPAL */
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: linear-gradient(90deg, #f5d76e, #d4af37, #f5d76e);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldText 6s linear infinite, glowPulse 4s ease-in-out infinite;
+      margin-bottom: 0.6rem;
+    }
+
+    @keyframes goldText {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(212,175,55,0.3);
+      }
+      50% {
+        text-shadow: 0 0 25px rgba(212,175,55,0.7);
+      }
+    }
+
+    /* SOUS-TEXTE ANGLAIS */
+    .hero-sub {
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      animation: fadeSlide 2.5s ease forwards;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 0.75;
+        transform: translateY(0);
+      }
+    }
+
+    /* === LIEN ANIMÉ === */
+    .hero-link {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: #d4af37;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .hero-link::after {
       content: "";
       position: absolute;
-      top: 0;
       left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #d4af37, #f5d76e);
+      transition: width 0.4s ease;
+    }
+
+    .hero-link:hover {
+      color: #f5d76e;
+      text-shadow: 0 0 12px rgba(212,175,55,0.6);
+    }
+
+    .hero-link:hover::after {
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      padding: 20px;
-      color: #fff;
-    }
-    .hero h1 {
-      font-size: 4rem;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 30px;
-      background-color: #ff6600;
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    .btn:hover {
-      background-color: #e55a00;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header / Hero -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Bienvenue dans l'entrée de l'élite</h1>
-      <p>Rejoins la communauté — joue, partage, connecte-toi</p>
-      <a href="#about" class="btn">En savoir plus</a>
-    </div>
-  </header>
-
-  <!-- Bouton Discord -->
-  <div style="text-align:center; margin: 30px 0;">
-    <a href="https://discord.com/channels/1441257208003432491/1441258520224993310" target="_blank"
-       style="padding: 15px 30px; background-color: #43B581; color: white;
-              text-decoration: none; font-size: 18px; border-radius: 10px; font-weight: bold;">
-      Rejoindre VC Chill
-    </a>
+  <!-- PARTICULES -->
+  <div class="particles">
+    <span class="particle" style="left:5%; animation-duration:14s;"></span>
+    <span class="particle dark" style="left:15%; animation-duration:18s;"></span>
+    <span class="particle" style="left:30%; animation-duration:12s;"></span>
+    <span class="particle dark" style="left:45%; animation-duration:20s;"></span>
+    <span class="particle" style="left:60%; animation-duration:16s;"></span>
+    <span class="particle dark" style="left:75%; animation-duration:22s;"></span>
+    <span class="particle" style="left:90%; animation-duration:15s;"></span>
   </div>
 
-  <!-- Section À propos -->
-  <section id="about" class="section about">
-    <div class="container">
-      <h2>À propos de nous</h2>
-      <p>
-        Fun Gaming Hub est un espace dédié aux joueurs passionnés. Que tu sois
-        compétiteur, streamer, ou juste ici pour le fun, tu trouveras des ressources,
-        des événements, et des joueurs comme toi.
-      </p>
-    </div>
-  </section>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Bienvenue sur l’Élite</h1>
+    <small class="hero-sub">Welcome to the Elite</small>
 
-  <!-- Section Services / Fonctionnalités -->
-  <section id="features" class="section features">
-    <div class="container">
-      <h2>Ce que nous offrons</h2>
-      <div class="feature-list">
-        <div class="feature-item">
-          <h3>Tournois</h3>
-          <p>Participe à des tournois réguliers avec des prix et des classements.</p>
-        </div>
-        <div class="feature-item">
-          <h3>Communauté</h3>
-          <p>Un forum, des groupes de discussion et des salons vocaux.</p>
-        </div>
-        <div class="feature-item">
-          <h3>Ressources</h3>
-          <p>Tutoriaux, guides, et vidéos pour améliorer ton gameplay.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section Contact -->
-  <section id="contact" class="section contact">
-    <div class="container">
-      <h2>Contactez-nous</h2>
-      <form action="#" method="post">
-        <label for="name">Nom</label>
-        <input type="text" id="name" name="name" required />
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit" class="btn">Envoyer</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.7); color: white;">
-    <a href="https://kitsuneblaze.wixsite.com/fun-gaming-hub" target="_blank" class="footer-link">
-      https://kitsuneblaze.wixsite.com/fun-gaming-hub
+    <a
+      href="https://kitsuneblaze.github.io/mon-site-test/"
+      class="hero-link"
+      target="_blank">
+      https://kitsuneblaze.github.io/mon-site-test/
     </a>
-    <p>&copy; 2025 Fun Gaming Hub. Tous droits réservés.</p>
-  </footer>
-
-  <!-- JS -->
-  <script src="script.js"></script>
+  </section>
 
 </body>
 </html>
-
