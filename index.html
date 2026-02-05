@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bienvenue sur l’Élite</title>
+  <title>Serveur Minecraft – Accueil</title>
 
   <style>
-    /* === RESET === */
+    /* Reset basique */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
@@ -31,7 +31,7 @@
         linear-gradient(120deg, #000000, #0b0b0b, #1a1405);
       background-size: 200% 200%;
       animation: goldFlow 18s ease-in-out infinite;
-      z-index: -2;
+      z-index: -1;
     }
 
     @keyframes goldFlow {
@@ -40,12 +40,154 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* === PARTICULES NETHER === */
+    /* === HERO === */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: linear-gradient(90deg, #f5d76e, #d4af37, #f5d76e);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldText 6s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes goldText {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* === TEXTE HERO PRO ANIMÉ === */
+    .hero h1 {
+      animation: goldText 6s linear infinite, glowPulse 4s ease-in-out infinite;
+    }
+
+    .hero-sub {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      animation: fadeSlide 3s ease forwards;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(212,175,55,0.3);
+      }
+      50% {
+        text-shadow: 0 0 25px rgba(212,175,55,0.7);
+      }
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 0.75;
+        transform: translateY(0);
+      }
+    }
+
+    /* === LIEN ANIMÉ === */
+    .hero-link {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #f5d76e;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      transition: all 0.35s ease;
+      position: relative;
+    }
+
+    .hero-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #d4af37, #f5d76e);
+      transition: width 0.35s ease;
+    }
+
+    .hero-link:hover {
+      opacity: 1;
+      transform: scale(1.05);
+      text-shadow: 0 0 15px rgba(212,175,55,0.6);
+    }
+
+    .hero-link:hover::after {
+      width: 100%;
+    }
+      to {
+        opacity: 0.75;
+        transform: translateY(0);
+      }
+    }
+    }
+
+    .hero p {
+      max-width: 600px;
+      font-size: 1.2rem;
+      opacity: 0.85;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 1.6rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d4af37, #f5d76e);
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212,175,55,0.35);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+  
+
+    /* === PARTICULES STYLE NETHER (OR & NOIR) === */
     .particles {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -1;
+      overflow: hidden;
+      z-index: 0;
     }
 
     .particle {
@@ -76,118 +218,35 @@
       }
     }
 
-    /* === HERO === */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
 
-    /* TITRE PRINCIPAL */
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      background: linear-gradient(90deg, #f5d76e, #d4af37, #f5d76e);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldText 6s linear infinite, glowPulse 4s ease-in-out infinite;
-      margin-bottom: 0.6rem;
-    }
-
-    @keyframes goldText {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        text-shadow: 0 0 10px rgba(212,175,55,0.3);
-      }
-      50% {
-        text-shadow: 0 0 25px rgba(212,175,55,0.7);
-      }
-    }
-
-    /* SOUS-TEXTE ANGLAIS */
-    .hero-sub {
-      font-size: 0.95rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      animation: fadeSlide 2.5s ease forwards;
-    }
-
-    @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 0.75;
-        transform: translateY(0);
-      }
-    }
-
-    /* === LIEN ANIMÉ === */
-    .hero-link {
-      margin-top: 1.2rem;
-      font-size: 0.9rem;
-      color: #d4af37;
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .hero-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(90deg, #d4af37, #f5d76e);
-      transition: width 0.4s ease;
-    }
-
-    .hero-link:hover {
-      color: #f5d76e;
-      text-shadow: 0 0 12px rgba(212,175,55,0.6);
-    }
-
-    .hero-link:hover::after {
-      width: 100%;
-    }
-  </style>
 </head>
 <body>
 
-  <!-- PARTICULES -->
+  <!-- Particules Nether -->
   <div class="particles">
-    <span class="particle" style="left:5%; animation-duration:14s;"></span>
-    <span class="particle dark" style="left:15%; animation-duration:18s;"></span>
-    <span class="particle" style="left:30%; animation-duration:12s;"></span>
-    <span class="particle dark" style="left:45%; animation-duration:20s;"></span>
-    <span class="particle" style="left:60%; animation-duration:16s;"></span>
-    <span class="particle dark" style="left:75%; animation-duration:22s;"></span>
-    <span class="particle" style="left:90%; animation-duration:15s;"></span>
+    <span class="particle" style="left:5%; animation-duration:14s; animation-delay:0s;"></span>
+    <span class="particle dark" style="left:15%; animation-duration:18s; animation-delay:3s;"></span>
+    <span class="particle" style="left:25%; animation-duration:12s; animation-delay:6s;"></span>
+    <span class="particle dark" style="left:40%; animation-duration:20s; animation-delay:2s;"></span>
+    <span class="particle" style="left:55%; animation-duration:16s; animation-delay:4s;"></span>
+    <span class="particle dark" style="left:70%; animation-duration:22s; animation-delay:1s;"></span>
+    <span class="particle" style="left:85%; animation-duration:15s; animation-delay:5s;"></span>
   </div>
 
-  <!-- HERO -->
+
+
   <section class="hero">
     <h1>Bienvenue sur l’Élite</h1>
-    <small class="hero-sub">Welcome to the Elite</small>
-
-    <a
-      href="https://kitsuneblaze.github.io/mon-site-test/"
-      class="hero-link"
-      target="_blank">
-      https://kitsuneblaze.github.io/mon-site-test/
-    </a>
+      <small class="hero-sub">Welcome to the Elite</small>
+      <a href="https://xkitsuneblazex1.wixsite.com/super-gamer-communit" class="hero-link" target="_blank">https://xkitsuneblazex1.wixsite.com/super-gamer-communit</a>
+    <p>
+      Un serveur Minecraft chill orienté build, créativité et bonne ambiance.
+      Joue tranquille, construis librement.
+    </p>
+    <div class="buttons">
+      <a href="#" class="btn btn-primary">Rejoindre le serveur</a>
+      <a href="#" class="btn btn-secondary">Discord</a>
+    </div>
   </section>
 
 </body>
