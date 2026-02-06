@@ -1,253 +1,88 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Serveur Minecraft – Accueil</title>
+    <meta charset="UTF-8">
+    <title>Bienvenue L'Élite</title>
 
-  <style>
-    /* Reset basique */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      min-height: 100vh;
-      color: white;
-      overflow-x: hidden;
-    }
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000, #1a1400, #000000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: #f5d76e;
+        }
 
-    /* === BACKGROUND OR & NOIR ANIMÉ === */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(212,175,55,0.25), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(212,175,55,0.15), transparent 45%),
-        linear-gradient(120deg, #000000, #0b0b0b, #1a1405);
-      background-size: 200% 200%;
-      animation: goldFlow 18s ease-in-out infinite;
-      z-index: -1;
-    }
+        .elite-container {
+            text-align: center;
+            padding: 50px 70px;
+            border: 2px solid #f5d76e;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 40px rgba(245, 215, 110, 0.25);
+            animation: fadeIn 1.5s ease;
+        }
 
-    @keyframes goldFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
 
-    /* === HERO === */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      backdrop-filter: blur(2px);
-    }
+        p {
+            font-size: 18px;
+            margin-bottom: 35px;
+            color: #ddd;
+        }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      background: linear-gradient(90deg, #f5d76e, #d4af37, #f5d76e);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldText 6s linear infinite;
-      margin-bottom: 1rem;
-    }
+        .elite-btn {
+            text-decoration: none;
+            padding: 15px 35px;
+            font-size: 18px;
+            color: #000;
+            background: #f5d76e;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
 
-    @keyframes goldText {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
-    }
+        .elite-btn:hover {
+            background: #fff1a8;
+            box-shadow: 0 0 25px #f5d76e;
+            transform: scale(1.05);
+        }
 
-    /* === TEXTE HERO PRO ANIMÉ === */
-    .hero h1 {
-      animation: goldText 6s linear infinite, glowPulse 4s ease-in-out infinite;
-    }
-
-    .hero-sub {
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      animation: fadeSlide 3s ease forwards;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        text-shadow: 0 0 10px rgba(212,175,55,0.3);
-      }
-      50% {
-        text-shadow: 0 0 25px rgba(212,175,55,0.7);
-      }
-    }
-
-    @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 0.75;
-        transform: translateY(0);
-      }
-    }
-
-    /* === LIEN ANIMÉ === */
-    .hero-link {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      color: #f5d76e;
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      opacity: 0.85;
-      transition: all 0.35s ease;
-      position: relative;
-    }
-
-    .hero-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #d4af37, #f5d76e);
-      transition: width 0.35s ease;
-    }
-
-    .hero-link:hover {
-      opacity: 1;
-      transform: scale(1.05);
-      text-shadow: 0 0 15px rgba(212,175,55,0.6);
-    }
-
-    .hero-link:hover::after {
-      width: 100%;
-    }
-      to {
-        opacity: 0.75;
-        transform: translateY(0);
-      }
-    }
-    }
-
-    .hero p {
-      max-width: 600px;
-      font-size: 1.2rem;
-      opacity: 0.85;
-      margin-bottom: 2rem;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.9rem 1.6rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #d4af37, #f5d76e);
-      color: black;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(212,175,55,0.35);
-    }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.08);
-    }
-  
-
-    /* === PARTICULES STYLE NETHER (OR & NOIR) === */
-    .particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .particle {
-      position: absolute;
-      bottom: -10px;
-      width: 3px;
-      height: 3px;
-      background: rgba(212,175,55,0.8);
-      box-shadow: 0 0 6px rgba(212,175,55,0.8);
-      animation: rise linear infinite;
-      opacity: 0.8;
-    }
-
-    .particle.dark {
-      background: rgba(0,0,0,0.9);
-      box-shadow: 0 0 6px rgba(0,0,0,0.9);
-    }
-
-    @keyframes rise {
-      from {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-      }
-      20% { opacity: 0.8; }
-      to {
-        transform: translateY(-110vh) scale(0.3);
-        opacity: 0;
-      }
-    }
-
-
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Particules Nether -->
-  <div class="particles">
-    <span class="particle" style="left:5%; animation-duration:14s; animation-delay:0s;"></span>
-    <span class="particle dark" style="left:15%; animation-duration:18s; animation-delay:3s;"></span>
-    <span class="particle" style="left:25%; animation-duration:12s; animation-delay:6s;"></span>
-    <span class="particle dark" style="left:40%; animation-duration:20s; animation-delay:2s;"></span>
-    <span class="particle" style="left:55%; animation-duration:16s; animation-delay:4s;"></span>
-    <span class="particle dark" style="left:70%; animation-duration:22s; animation-delay:1s;"></span>
-    <span class="particle" style="left:85%; animation-duration:15s; animation-delay:5s;"></span>
-  </div>
+    <div class="elite-container">
+        <h1>Bienvenue dans L’Élite</h1>
+        <p>Accès réservé aux vrais membres.</p>
 
-
-
-  <section class="hero">
-    <h1>Bienvenue sur l’Élite</h1>
-      <small class="hero-sub">Welcome to the Elite</small>
-      <a href="https://xkitsuneblazex1.wixsite.com/super-gamer-communit" class="hero-link" target="_blank">https://xkitsuneblazex1.wixsite.com/super-gamer-communit</a>
-    <p>
-      Un serveur Minecraft chill orienté build, créativité et bonne ambiance.
-      Joue tranquille, construis librement.
-    </p>
-    <div class="buttons">
-      <a href="#" class="btn btn-primary">Rejoindre le serveur</a>
-      <a href="#" class="btn btn-secondary">Discord</a>
+        <a class="elite-btn"
+           href="https://xkitsuneblazex1.wixsite.com/super-gamer-communit"
+           target="_blank">
+           Entrer dans la communauté
+        </a>
     </div>
-  </section>
 
 </body>
 </html>
